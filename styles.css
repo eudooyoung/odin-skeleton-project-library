@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --light-white: #fffcf2;
+  --chocolate-red: #640016;
+  --font-shadow: 0.1rem 0.1rem #000, 0.1rem -0.1rem #000, -0.1rem 0.1rem #000,
+    -0.1rem -0.1rem #000;
+}
+
+body {
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  list-style: none;
+}
+
+.container {
+  height: 100vh;
+
+  display: grid;
+  grid-template-rows: 130px 1fr 50px;
+}
+
+/* header */
+.header {
+  background-color: var(--light-white);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-container {
+  height: 85%;
+  flex-basis: 500px;
+  border: 0.2rem double var(--chocolate-red);
+
+  display: grid;
+  grid-template-areas:
+    "top-left     .....  top-right"
+    "top-left     title  top-right"
+    "bottom-left  title  bottom-right"
+    "bottom-left  .....  bottom-right";
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: 50px 1fr 50px;
+}
+
+.top-right,
+.bottom-left {
+  background-image: url(./svg/corner.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.top-right {
+  grid-area: top-right;
+}
+
+.bottom-right {
+  grid-area: bottom-right;
+}
+
+.bottom-left {
+  grid-area: bottom-left;
+  transform: rotate(180deg);
+}
+
+.top-left {
+  grid-area: top-left;
+}
+
+.title {
+  grid-area: title;
+  font-family: "Rye", serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 3rem;
+  color: var(--chocolate-red);
+
+  display: grid;
+  place-items: center;
+}
+
+/* main */
+.main {
+}
+
+.shelf {
+  height: 100%;
+  padding: 20px;
+  background: var(--chocolate-red);
+
+  display: grid;
+  gap: 20px;
+  /* grid-template-rows: repeat(2, 1fr); */
+}
+
+.shelf-row {
+  background: var(--light-white);
+  padding: 150px 10px 10px 10px;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(auto-fit, 150px);
+  gap: 10px;
+}
+
+.book {
+  background: #143224;
+  /* border-radius: 5px; */
+  color: #f7ed4c;
+  border: 0.4rem double black;
+  /* outline: 5px double black; */
+  padding: 80px 50px;
+  transition: all 0.1s;
+
+  display: grid;
+  justify-content: center;
+}
+
+.book-title {
+  font-family: "Germania One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.85rem;
+  text-align: center;
+  text-shadow: var(--font-shadow);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.book-title-word {
+  flex-basis: 2.3rem;
+}
+
+.book:hover {
+  cursor: pointer;
+  /* outline: 3px solid #003630; */
+  transform: scale(1.07);
+  /* outline: none; */
+}
+
+/* footer */
+.footer {
+}

@@ -7,6 +7,7 @@
 :root {
   --light-white: #fffcf2;
   --chocolate-red: #640016;
+  --dark-green: #143224;
   --font-shadow: 0.1rem 0.1rem #000, 0.1rem -0.1rem #000, -0.1rem 0.1rem #000,
     -0.1rem -0.1rem #000;
 }
@@ -94,7 +95,7 @@ body {
   background: var(--chocolate-red);
 
   display: grid;
-  gap: 20px;
+  gap: 0px;
   /* grid-template-rows: repeat(2, 1fr); */
 }
 
@@ -109,16 +110,19 @@ body {
 }
 
 .book {
-  background: #143224;
-  /* border-radius: 5px; */
+  background: var(--dark-green);
   color: #f7ed4c;
   border: 0.4rem double black;
-  /* outline: 5px double black; */
   padding: 80px 50px;
   transition: all 0.1s;
 
   display: grid;
   justify-content: center;
+}
+
+.book:hover {
+  cursor: pointer;
+  transform: scale(1.07);
 }
 
 .book-title {
@@ -137,13 +141,77 @@ body {
   flex-basis: 2.3rem;
 }
 
-.book:hover {
-  cursor: pointer;
-  /* outline: 3px solid #003630; */
-  transform: scale(1.07);
-  /* outline: none; */
+.book-dialog {
+  margin: auto;
+  min-width: 30%;
+  min-height: 30%;
+  border: none;
+
+  opacity: 0;
+  transform: scaleY(0);
+  transition: all 0.2s allow-discrete;
+}
+
+.book-dialog:open {
+  padding: 3rem 1rem;
+  outline: 0.4rem double var(--chocolate-red);
+  outline-offset: -0.5rem;
+  background-color: var(--light-white);
+
+  opacity: 1;
+  transform: scaleY(1);
+
+  display: grid;
+  grid-template-rows: 4rem 2rem 2rem 2rem;
+  align-content: space-between;
+}
+
+@starting-style {
+  .book-dialog:open {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
+
+.book-dialog::backdrop {
+  background-color: transparent;
+  transition: all 0.3s allow-discrete;
+}
+
+.book-dialog:open::backdrop {
+  background-color: #030720b9;
+}
+
+@starting-style {
+  .book-dialog:open::backdrop {
+    background-color: transparent;
+  }
+}
+
+.book-dialog > h2 {
+  font-size: 1.8rem;
+}
+
+.book-dialog > p {
+  font-size: 1.2rem;
+  font-weight: 400;
 }
 
 /* footer */
 .footer {
+  background-color: var(--light-white);
+  color: var(--chocolate-red);
+  font-weight: 500;
+  letter-spacing: 0.02rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer a {
+}
+
+.footer a:visited {
+  color: inherit;
 }

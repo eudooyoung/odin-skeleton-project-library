@@ -8,7 +8,7 @@ function Book(title, author, pages, isRead) {
   this.author = author;
   this.pages = pages;
   this.isRead = isRead;
-  this.readMessage = this.isRead ? "read" : "not read yet";
+  this.readMessage = this.isRead ? "Read" : "Not read";
 
   this.info = () =>
     `${this.title} is written by ${this.author}, ${this.pages} pages, ${this.readMessage}`;
@@ -26,12 +26,14 @@ addBookToLibrary("What is History?", "E.H. Carr", 100, false);
 
 const shelfRow = document.querySelector(".shelf-row");
 const bookOpenSound = document.querySelector("#book-open-sound");
+const modalContainer = document.querySelector(".modal-container");
 
 function displayBooks() {
   myLibrary.forEach((book) => {
     const newBook = document.createElement("div");
     newBook.classList.add("book");
 
+    // book spine
     const bookTitle = document.createElement("div");
     bookTitle.classList.add("book-title");
     book.title.split(" ").forEach((word) => {
@@ -41,8 +43,33 @@ function displayBooks() {
       bookTitle.appendChild(bookTitleWord);
     });
 
-    newBook.addEventListener("mousedown", () => bookOpenSound.play());
-    newBook.addEventListener("mouseleave", () => {
+    // book opened
+    const bookDialog = document.createElement("dialog");
+    const dialogTitle = document.createElement("h2");
+    const dialogAuthor = document.createElement("p");
+    const dialogPages = document.createElement("p");
+    const dialogReadMessage = document.createElement("p");
+
+    bookDialog.classList.add("book-dialog");
+    bookDialog.setAttribute("closedby", "any");
+    dialogTitle.textContent = "Title: " + book.title;
+    dialogAuthor.textContent = "Written by " + book.author;
+    dialogPages.textContent = book.pages + " Pages";
+    dialogReadMessage.textContent = "Status: " + book.readMessage;
+
+    bookDialog.appendChild(dialogTitle);
+    bookDialog.appendChild(dialogAuthor);
+    bookDialog.appendChild(dialogPages);
+    bookDialog.appendChild(dialogReadMessage);
+
+    modalContainer.appendChild(bookDialog);
+
+    newBook.addEventListener("click", () => {
+      bookDialog.showModal();
+      bookOpenSound.play();
+    });
+
+    bookDialog.addEventListener("close", () => {
       bookOpenSound.pause();
       bookOpenSound.currentTime = 0;
     });

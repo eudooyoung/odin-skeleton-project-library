@@ -26,6 +26,7 @@ addBookToLibrary("What is History?", "E.H. Carr", 100, false);
 
 const shelfRow = document.querySelector(".shelf-row");
 const bookOpenSound = document.querySelector("#book-open-sound");
+const bookHoverSound = document.querySelector("#book-hover-sound");
 const modalContainer = document.querySelector(".modal-container");
 
 function displayBooks() {
@@ -74,9 +75,23 @@ function displayBooks() {
       bookOpenSound.currentTime = 0;
     });
 
+    newBook.addEventListener("mouseenter", () => bookHoverSound.play());
+    newBook.addEventListener("mouseleave", () => {
+      bookHoverSound.pause();
+      bookHoverSound.currentTime = 0;
+    })
+
     newBook.appendChild(bookTitle);
     shelfRow.appendChild(newBook);
   });
 }
+
+const muteButton = document.querySelector(".button.mute");
+muteButton.addEventListener("click", () => {
+  muteButton.classList.toggle("on");
+  document
+    .querySelectorAll("audio")
+    .forEach((sound) => (sound.muted = !sound.muted));
+});
 
 displayBooks();

@@ -29,14 +29,16 @@ body {
 .header {
   background-color: var(--light-white);
 
-  display: flex;
-  justify-content: center;
+  display: grid;
   align-items: center;
+  grid-template-areas: "... title buttons";
+  grid-template-columns: 1fr 500px 1fr;
 }
 
 .title-container {
+  grid-area: title;
   height: 85%;
-  flex-basis: 500px;
+  min-width: 500px;
   border: 0.2rem double var(--chocolate-red);
 
   display: grid;
@@ -85,18 +87,67 @@ body {
   place-items: center;
 }
 
+.button-container {
+  width: 50%;
+  height: 50%;
+  grid-area: buttons;
+  align-self: end;
+  justify-self: end;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 9rem 3rem;
+  grid-template-rows: 3rem;
+  place-content: center;
+  gap: 1rem;
+}
+
+.button-container div:hover {
+  cursor: pointer;
+}
+
+.button.add-book {
+  font-family: "Macondo Swash Caps", cursive;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-style: normal;
+  color: var(--chocolate-red);
+
+  padding: 0.5rem 0.5rem;
+  place-self: center;
+  border: none;
+
+  text-decoration: transparent;
+  transition: all 0.3s;
+}
+
+.button.add-book:hover {
+  text-decoration: underline;
+}
+
+.button.mute {
+  background-image: url(./svg/volume-off.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  max-width: 2rem;
+}
+
+.button.mute.on {
+  background-image: url(./svg/volume-high.svg);
+}
+
 /* main */
 .main {
 }
 
 .shelf {
   height: 100%;
-  padding: 20px;
+  padding: 20px 20px 20px 20px;
   background: var(--chocolate-red);
 
   display: grid;
-  gap: 0px;
-  /* grid-template-rows: repeat(2, 1fr); */
+  /* grid-template-rows: repeat(auto-fill, 680px); */
 }
 
 .shelf-row {
@@ -153,7 +204,7 @@ body {
 }
 
 .book-dialog:open {
-  padding: 3rem 1rem;
+  padding: 3rem 1.5rem;
   outline: 0.4rem double var(--chocolate-red);
   outline-offset: -0.5rem;
   background-color: var(--light-white);
@@ -189,12 +240,23 @@ body {
 }
 
 .book-dialog > h2 {
+  font-family: "Almendra SC", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.book-dialog > h2 {
   font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
 }
 
 .book-dialog > p {
-  font-size: 1.2rem;
-  font-weight: 400;
+  font-family: "Sono", monospace;
+  font-style: normal;
+  font-variation-settings: "MONO" 1;
+  font-size: 1.15rem;
+  letter-spacing: -0.05rem;
 }
 
 /* footer */
@@ -202,7 +264,7 @@ body {
   background-color: var(--light-white);
   color: var(--chocolate-red);
   font-weight: 500;
-  letter-spacing: 0.02rem;
+  letter-spacing: 0.1rem;
 
   display: flex;
   justify-content: center;
@@ -210,6 +272,7 @@ body {
 }
 
 .footer a {
+  color: inherit;
 }
 
 .footer a:visited {

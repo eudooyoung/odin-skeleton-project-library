@@ -8,13 +8,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Germania+One&family=Rye&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Almendra+SC&family=Germania+One&family=Macondo+Swash+Caps&family=Rye&family=Sono:wght@200..800&display=swap"
       rel="stylesheet"
     />
     <script src="script.js" defer></script>
   </head>
   <body>
-    <audio id="book-open-sound" src="./sound/book-open-sound.mp3"></audio>
+    <div class="audoi-container">
+      <audio
+        id="book-hover-sound"
+        src="./sound/book-hover-sound.mp3"
+        muted
+      ></audio>
+      <audio
+        id="book-open-sound"
+        src="./sound/book-open-sound.mp3"
+        muted
+      ></audio>
+    </div>
     <div class="modal-container"></div>
     <div class="container">
       <div class="header">
@@ -25,6 +36,10 @@
           <div class="title-border top-left"></div>
           <h1 class="title">My Library</h1>
         </div>
+        <div class="button-container">
+          <div class="button add-book">Add book</div>
+          <div class="button mute"></div>
+        </div>
       </div>
       <div class="main">
         <div class="shelf">
@@ -34,10 +49,14 @@
       <div class="footer">
         <p>
           ©2025
-          <a href="git@github.com:eudooyoung/odin-skeleton-project-library.git">
-            eudooyoung
+          <a
+            href="https://github.com/eudooyoung/odin-skeleton-project-library.git"
+            target="_blank"
+            rel="noopener"
+          >
+            eudooyoung.
           </a>
-          . All rights reserved.
+          All rights reserved.
         </p>
       </div>
     </div>

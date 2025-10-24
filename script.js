@@ -32,11 +32,11 @@ const modalContainer = document.querySelector(".modal-container");
 function displayBooks() {
   myLibrary.forEach((book) => {
     const newBook = document.createElement("div");
-    newBook.classList.add("book");
-
-    // book spine
     const bookTitle = document.createElement("div");
+
+    newBook.classList.add("book");
     bookTitle.classList.add("book-title");
+
     book.title.split(" ").forEach((word) => {
       const bookTitleWord = document.createElement("span");
       bookTitleWord.classList.add("book-title-word");
@@ -44,45 +44,64 @@ function displayBooks() {
       bookTitle.appendChild(bookTitleWord);
     });
 
-    // book opened
-    const bookDialog = document.createElement("dialog");
-    const dialogTitle = document.createElement("h2");
-    const dialogAuthor = document.createElement("p");
-    const dialogPages = document.createElement("p");
-    const dialogReadMessage = document.createElement("p");
+    const bookCard = createCard(book);
 
-    bookDialog.classList.add("book-dialog");
-    bookDialog.setAttribute("closedby", "any");
-    dialogTitle.textContent = "Title: " + book.title;
-    dialogAuthor.textContent = "Written by " + book.author;
-    dialogPages.textContent = book.pages + " Pages";
-    dialogReadMessage.textContent = "Status: " + book.readMessage;
-
-    bookDialog.appendChild(dialogTitle);
-    bookDialog.appendChild(dialogAuthor);
-    bookDialog.appendChild(dialogPages);
-    bookDialog.appendChild(dialogReadMessage);
-
-    modalContainer.appendChild(bookDialog);
-
-    newBook.addEventListener("click", () => {
-      bookDialog.showModal();
-      bookOpenSound.play();
-    });
-
-    bookDialog.addEventListener("close", () => {
-      bookOpenSound.pause();
-      bookOpenSound.currentTime = 0;
-    });
-
-    newBook.addEventListener("mouseenter", () => bookHoverSound.play());
-    newBook.addEventListener("mouseleave", () => {
-      bookHoverSound.pause();
-      bookHoverSound.currentTime = 0;
-    })
+    setEventListener(newBook, bookCard);
 
     newBook.appendChild(bookTitle);
     shelfRow.appendChild(newBook);
+  });
+}
+
+function createCard(book) {
+  const bookCard = document.createElement("dialog");
+  const cardTitle = document.createElement("h2");
+  const cardAuthor = document.createElement("p");
+  const cardPages = document.createElement("p");
+  const cardReadMessage = document.createElement("p");
+  const buttonContainer = document.createElement("div");
+  const editButton = document.createElement("div");
+  const removeButton = document.createElement("div");
+
+  bookCard.classList.add("book-card");
+  bookCard.setAttribute("closedby", "any");
+  cardTitle.textContent = "Title: " + book.title;
+  cardAuthor.textContent = "Written by " + book.author;
+  cardPages.textContent = book.pages + " Pages";
+  cardReadMessage.textContent = "Status: " + book.readMessage;
+  buttonContainer.classList.add("button-container");
+  editButton.classList.add("button", "edit");
+  removeButton.classList.add("button", "remove");
+
+  buttonContainer.appendChild(editButton);
+  buttonContainer.appendChild(removeButton);
+
+  bookCard.appendChild(cardTitle);
+  bookCard.appendChild(cardAuthor);
+  bookCard.appendChild(cardPages);
+  bookCard.appendChild(cardReadMessage);
+  bookCard.appendChild(buttonContainer);
+
+  modalContainer.appendChild(bookCard);
+
+  return bookCard;
+}
+
+function setEventListener(book, card) {
+  book.addEventListener("click", () => {
+    card.showModal();
+    bookOpenSound.play();
+  });
+
+  card.addEventListener("close", () => {
+    bookOpenSound.pause();
+    bookOpenSound.currentTime = 0;
+  });
+
+  book.addEventListener("mouseenter", () => bookHoverSound.play());
+  book.addEventListener("mouseleave", () => {
+    bookHoverSound.pause();
+    bookHoverSound.currentTime = 0;
   });
 }
 
@@ -92,6 +111,16 @@ muteButton.addEventListener("click", () => {
   document
     .querySelectorAll("audio")
     .forEach((sound) => (sound.muted = !sound.muted));
+});
+
+const addBookButton = document.querySelector(".button.add-book");
+const newBookCard = document.querySelector(".new-book-dialog");
+addBookButton.addEventListener("click", () => {
+  shelfRow.replaceChildren();
+  addBookToLibrary("", "", "", "");
+  displayBooks();
+  const clickEvent = new Event("click");
+  shelfRow.lastChild.dispatchEvent(clickEvent);
 });
 
 displayBooks();

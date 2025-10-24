@@ -8,13 +8,19 @@
   --light-white: #fffcf2;
   --chocolate-red: #640016;
   --dark-green: #143224;
-  --font-shadow: 0.1rem 0.1rem #000, 0.1rem -0.1rem #000, -0.1rem 0.1rem #000,
+
+  --font-title: "Rye", serif;
+  --font-button: "Macondo Swash Caps", cursive;
+  --font-book-spine: "Germania One", system-ui;
+  --font-card-title: "Almendra SC", serif;
+  --font-card-description: "Sono", monospace;
+  --font-border: 0.1rem 0.1rem #000, 0.1rem -0.1rem #000, -0.1rem 0.1rem #000,
     -0.1rem -0.1rem #000;
 }
 
 body {
-  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  /* font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; */
   list-style: none;
 }
 
@@ -77,9 +83,8 @@ body {
 
 .title {
   grid-area: title;
-  font-family: "Rye", serif;
+  font-family: var(--font-title);
   font-weight: normal;
-  font-style: normal;
   font-size: 3rem;
   color: var(--chocolate-red);
 
@@ -87,7 +92,7 @@ body {
   place-items: center;
 }
 
-.button-container {
+.header .button-container {
   width: 50%;
   height: 50%;
   grid-area: buttons;
@@ -107,22 +112,22 @@ body {
 }
 
 .button.add-book {
-  font-family: "Macondo Swash Caps", cursive;
+  font-family: var(--font-button);
   font-size: 1.5rem;
   font-weight: 600;
-  font-style: normal;
   color: var(--chocolate-red);
 
   padding: 0.5rem 0.5rem;
   place-self: center;
   border: none;
-
-  text-decoration: transparent;
-  transition: all 0.3s;
 }
 
 .button.add-book:hover {
   text-decoration: underline;
+}
+
+.new-book-dialog {
+  margin: auto;
 }
 
 .button.mute {
@@ -138,9 +143,6 @@ body {
 }
 
 /* main */
-.main {
-}
-
 .shelf {
   height: 100%;
   padding: 20px 20px 20px 20px;
@@ -177,12 +179,11 @@ body {
 }
 
 .book-title {
-  font-family: "Germania One", system-ui;
+  font-family: var(--font-book-spine);
   font-weight: 400;
-  font-style: normal;
   font-size: 1.85rem;
   text-align: center;
-  text-shadow: var(--font-shadow);
+  text-shadow: var(--font-border);
 
   display: flex;
   flex-direction: column;
@@ -192,7 +193,7 @@ body {
   flex-basis: 2.3rem;
 }
 
-.book-dialog {
+.book-card {
   margin: auto;
   min-width: 30%;
   min-height: 30%;
@@ -203,8 +204,8 @@ body {
   transition: all 0.2s allow-discrete;
 }
 
-.book-dialog:open {
-  padding: 3rem 1.5rem;
+.book-card:open {
+  padding: 2.5rem 2rem 1.5rem 2rem;
   outline: 0.4rem double var(--chocolate-red);
   outline-offset: -0.5rem;
   background-color: var(--light-white);
@@ -213,50 +214,67 @@ body {
   transform: scaleY(1);
 
   display: grid;
-  grid-template-rows: 4rem 2rem 2rem 2rem;
+  grid-template-rows: 4rem repeat(3, auto) 2rem;
   align-content: space-between;
 }
 
 @starting-style {
-  .book-dialog:open {
+  .book-card:open {
     opacity: 0;
     transform: scaleY(0);
   }
 }
 
-.book-dialog::backdrop {
+.book-card::backdrop {
   background-color: transparent;
   transition: all 0.3s allow-discrete;
 }
 
-.book-dialog:open::backdrop {
+.book-card:open::backdrop {
   background-color: #030720b9;
 }
 
 @starting-style {
-  .book-dialog:open::backdrop {
+  .book-card:open::backdrop {
     background-color: transparent;
   }
 }
 
-.book-dialog > h2 {
-  font-family: "Almendra SC", serif;
-  font-weight: 400;
+.book-card h2 {
+  font-family: var(--font-card-title);
   font-style: normal;
-}
-
-.book-dialog > h2 {
   font-size: 1.8rem;
   font-weight: 600;
   letter-spacing: 0.2rem;
 }
 
-.book-dialog > p {
-  font-family: "Sono", monospace;
+.book-card p {
+  font-family: var(--font-card-description);
   font-style: normal;
   font-variation-settings: "MONO" 1;
   font-size: 1.15rem;
   letter-spacing: -0.05rem;
+}
+
+.book-card .button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.book-card .button {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-width: 2rem;
+  margin: 0 0.8rem;
+}
+
+.button.edit {
+  background-image: url(./svg/quill.svg);
+}
+
+.button.remove {
+  background-image: url(./svg/remove-book.svg);
 }
 
 /* footer */
@@ -271,10 +289,7 @@ body {
   align-items: center;
 }
 
-.footer a {
-  color: inherit;
-}
-
+.footer a,
 .footer a:visited {
   color: inherit;
 }

@@ -3,7 +3,7 @@ const myLibrary = new Array();
 function Book(title, author, pages, isRead) {
   if (!new.target) throw Error("Call constructor with 'new' keyword");
 
-  id = crypto.randomUUID();
+  this.id = crypto.randomUUID();
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -44,64 +44,75 @@ function displayBooks() {
       bookTitle.appendChild(bookTitleWord);
     });
 
-    const bookCard = createCard(book);
+    const bookCard = document.querySelector(".book-card");
+    setCard(book, bookCard);
 
-    setEventListener(newBook, bookCard);
+    newBook.addEventListener("click", () => {
+      bookCard.showModal();
+      bookOpenSound.play();
+    });
+
+    newBook.addEventListener("mouseenter", () => bookHoverSound.play());
+    newBook.addEventListener("mouseleave", () => {
+      bookHoverSound.pause();
+      bookHoverSound.currentTime = 0;
+    });
 
     newBook.appendChild(bookTitle);
     shelfRow.appendChild(newBook);
   });
 }
+document.querySelector("#card-title").focus();
 
-function createCard(book) {
-  const bookCard = document.createElement("dialog");
-  const cardTitle = document.createElement("h2");
-  const cardAuthor = document.createElement("p");
-  const cardPages = document.createElement("p");
-  const cardReadMessage = document.createElement("p");
-  const buttonContainer = document.createElement("div");
-  const editButton = document.createElement("div");
-  const removeButton = document.createElement("div");
+function setCard(book, bookCard) {
+  // view form
+  const viewForm = document.querySelector(".book-card .view");
+  const cardTitle = document.querySelector(".card-title");
+  const cardAuthor = document.querySelector(".card-author");
+  const cardPages = document.querySelector(".card-pages");
+  const cardReadMessage = document.querySelector(".card-status");
+  const editButton = document.querySelector(".button.edit");
 
-  bookCard.classList.add("book-card");
-  bookCard.setAttribute("closedby", "any");
+  cardId = book.id;
   cardTitle.textContent = "Title: " + book.title;
   cardAuthor.textContent = "Written by " + book.author;
   cardPages.textContent = book.pages + " Pages";
   cardReadMessage.textContent = "Status: " + book.readMessage;
-  buttonContainer.classList.add("button-container");
-  editButton.classList.add("button", "edit");
-  removeButton.classList.add("button", "remove");
 
-  buttonContainer.appendChild(editButton);
-  buttonContainer.appendChild(removeButton);
-
-  bookCard.appendChild(cardTitle);
-  bookCard.appendChild(cardAuthor);
-  bookCard.appendChild(cardPages);
-  bookCard.appendChild(cardReadMessage);
-  bookCard.appendChild(buttonContainer);
-
-  modalContainer.appendChild(bookCard);
-
-  return bookCard;
-}
-
-function setEventListener(book, card) {
-  book.addEventListener("click", () => {
-    card.showModal();
-    bookOpenSound.play();
-  });
-
-  card.addEventListener("close", () => {
+  bookCard.addEventListener("close", () => {
     bookOpenSound.pause();
     bookOpenSound.currentTime = 0;
   });
 
-  book.addEventListener("mouseenter", () => bookHoverSound.play());
-  book.addEventListener("mouseleave", () => {
-    bookHoverSound.pause();
-    bookHoverSound.currentTime = 0;
+  // edit form
+  const editForm = document.querySelector("form.edit");
+  const newTitle = document.querySelector("#card-title");
+  const newAuthor = document.querySelector("#card-author");
+  const newPages = document.querySelector("#card-pages");
+  const newStatus = document.querySelector("#card-status");
+  const confirmButton = document.querySelector(".button.confirm");
+  const cancelButton = document.querySelector(".button.cancel");
+
+  newTitle.value = book.title;
+  newAuthor.value = book.author;
+  newPages.value = book.pages;
+  newStatus.value = book.isRead;
+
+  editButton.addEventListener("click", () => {
+    viewForm.style.display = "none";
+    editForm.style.display = "contents";
+
+    newTitle.focus();
+  });
+
+  confirmButton.addEventListener("click", () => {
+    viewForm.style.display = "contents";
+    editForm.style.display = "none";
+  });
+
+  cancelButton.addEventListener("click", () => {
+    viewForm.style.display = "contents";
+    editForm.style.display = "none";
   });
 }
 

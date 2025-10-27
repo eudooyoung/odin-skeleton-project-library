@@ -14,20 +14,55 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <div class="audoi-container">
+    <div class="audio-container">
       <audio
         id="book-hover-sound"
         src="./sound/book-hover-sound.mp3"
+        autoplay
         muted
       ></audio>
       <audio
         id="book-open-sound"
         src="./sound/book-open-sound.mp3"
+        autoplay
         muted
       ></audio>
     </div>
     <div class="modal-container">
-      <dialog class="new-book-dialog" closedby="any">Add form</dialog>
+      <dialog class="book-card" closedby="any">
+        <div class="view">
+          <h2 class="card-title"></h2>
+          <p class="card-author"></p>
+          <p class="card-pages"></p>
+          <p class="card-status"></p>
+          <div class="card button-container">
+            <div class="button edit"></div>
+          </div>
+        </div>
+
+        <form class="edit" action="#" method="post">
+          <h2>
+            <label for="card-title">Title:</label>
+            <input type="text" id="card-title" autofocus/>
+          </h2>
+          <p>
+            <label for="card-author">Author:</label>
+            <input type="text" id="card-author" />
+          </p>
+          <p>
+            <label for="card-pages">Pages:</label>
+            <input type="text" id="card-pages" />
+          </p>
+          <p>
+            <label for="card-status">Status:</label>
+            <input type="text" id="card-status" />
+          </p>
+          <div class="card button-container">
+            <div class="button confirm"></div>
+            <div class="button cancel"></div>
+          </div>
+        </form>
+      </dialog>
     </div>
     <div class="container">
       <div class="header">

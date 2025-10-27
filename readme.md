@@ -2,7 +2,9 @@ odin-skeleton-project-library
 
 corner svg by [freepik](https://www.freepik.com/free-vector/hand-drawn-ornaments_764539.htm#fromView=image_search_similar&page=1&position=2&uuid=3a9c3665-be5d-44ff-a230-abcecd098d0b&query=decorative+corner+svg)
 
-quill svg by [svgrepo](https://www.svgrepo.com/svg/134452/letter-quill)
+Check and Cancel svg by <a href="https://dribbble.com/saeedworks?ref=svgrepo.com" target="_blank">Saeedworks</a> in CC Attribution License via <a href="https://www.svgrepo.com/" target="_blank">SVG Repo</a>
+
+Edit svg by Vectors and icons by <a href="https://github.com/neuicons/neu?ref=svgrepo.com" target="_blank">Neuicons</a> in MIT License via <a href="https://www.svgrepo.com/" target="_blank">SVG Repo</a>
 
 Book remove svg by <a href="https://www.wishforge.games/?ref=svgrepo.com" target="_blank">Wishforge.games</a> in CC Attribution License via <a href="https://www.svgrepo.com/" target="_blank">SVG Repo</a>
 

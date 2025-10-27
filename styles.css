@@ -214,8 +214,9 @@ body {
   transform: scaleY(1);
 
   display: grid;
-  grid-template-rows: 4rem repeat(3, auto) 2rem;
+  grid-template-rows: 3rem repeat(3, auto) 2.5rem;
   align-content: space-between;
+  align-items: end;
 }
 
 @starting-style {
@@ -240,12 +241,18 @@ body {
   }
 }
 
+.book-card .view {
+  display: contents;
+}
+
 .book-card h2 {
   font-family: var(--font-card-title);
   font-style: normal;
   font-size: 1.8rem;
   font-weight: 600;
   letter-spacing: 0.2rem;
+
+  align-self: center;
 }
 
 .book-card p {
@@ -257,24 +264,62 @@ body {
 }
 
 .book-card .button-container {
+  align-self: stretch;
+
   display: flex;
-  justify-content: center;
+  justify-content: end;
 }
 
 .book-card .button {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  min-width: 2rem;
-  margin: 0 0.8rem;
+  min-width: 2.5rem;
 }
 
 .button.edit {
-  background-image: url(./svg/quill.svg);
+  background-image: url(./svg/edit.svg);
 }
 
 .button.remove {
   background-image: url(./svg/remove-book.svg);
+}
+
+form.edit {
+  display: none;
+}
+
+form.edit > * {
+  display: flex;
+  /* justify-content: space-between */
+}
+
+.edit label {
+  flex-basis: 5rem;
+}
+
+.edit input {
+  flex-grow: 1;
+  background-color: inherit;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-indent: 0.52rem;
+  border-bottom: 0.13rem dashed #ced3da;
+}
+
+.edit input:focus {
+  outline: none;
+}
+
+.button.confirm {
+  background-image: url(./svg/check-svgrepo-com.svg);
+}
+
+.button.cancel {
+  background-image: url(./svg/close-svgrepo-com.svg);
 }
 
 /* footer */

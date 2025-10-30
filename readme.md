@@ -1,3 +1,5 @@
+Check result [here](https://eudooyoung.github.io/odin-skeleton-project-library/)
+
 odin-skeleton-project-library [project-instruction](https://www.theodinproject.com/lessons/node-path-javascript-library)
 
 This project was built on basic HTML, CSS and JS.

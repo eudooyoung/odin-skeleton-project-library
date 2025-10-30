@@ -190,6 +190,7 @@ body {
 
 .book-title-word {
   flex-basis: 2.3rem;
+  max-width: 7rem;
   overflow-wrap: break-word;
 }
 

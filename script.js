@@ -19,7 +19,7 @@ Book.prototype.setCard = function () {
 
   cardTitle.textContent = "Title: " + this.title;
   cardAuthor.textContent = "Written by " + this.author;
-  cardPages.textContent = this.pages + " Pages";
+  cardPages.textContent = "Page(s): " + this.pages;
   if (this.isRead) {
     cardReadMessage.textContent = "Status: Read";
   } else {
@@ -203,6 +203,9 @@ document.addEventListener("keydown", (e) => {
 cancelButton.addEventListener("click", () => {
   viewForm.style.display = "contents";
   editForm.style.display = "none";
+
+  const book = getBookWithId(bookCard);
+  book.removeIfEmpty();
 });
 
 // remove

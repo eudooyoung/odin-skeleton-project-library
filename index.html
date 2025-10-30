@@ -43,15 +43,15 @@
         <form class="edit" action="#" method="post">
           <h2>
             <label for="card-title">Title:</label>
-            <input type="text" id="card-title" autofocus />
+            <input type="text" id="card-title" autofocus maxlength="50"/>
           </h2>
           <p>
             <label for="card-author">Author:</label>
-            <input type="text" id="card-author" />
+            <input type="text" id="card-author" maxlength="50"/>
           </p>
           <p>
-            <label for="card-pages">Pages:</label>
-            <input type="text" id="card-pages" />
+            <label for="card-pages">Page(s):</label>
+            <input type="number" id="card-pages" min="1"/>
           </p>
           <p class="card status-radio">
             <label for="read">Read</label>

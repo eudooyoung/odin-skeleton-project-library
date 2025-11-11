@@ -57,7 +57,6 @@ const clickEvent = new Event("click");
 //   }
 // };
 
-// class syntax
 class Book {
   id = crypto.randomUUID();
 

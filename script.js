@@ -2,59 +2,114 @@
 const myLibrary = new Array();
 const clickEvent = new Event("click");
 
-function Book(title, author, pages, isRead) {
-  if (!new.target) {
-    throw Error("Call constructor with 'new' keyword");
+// prototype syntax
+// function Book(title, author, pages, isRead) {
+//   if (!new.target) {
+//     throw Error("Call constructor with 'new' keyword");
+//   }
+
+//   this.id = crypto.randomUUID();
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.isRead = isRead;
+// }
+
+// Book.prototype.setCard = function () {
+//   bookCard.dataset.id = this.id;
+
+//   cardTitle.textContent = "Title: " + this.title;
+//   cardAuthor.textContent = "Written by " + this.author;
+//   cardPages.textContent = "Page(s): " + this.pages;
+//   if (this.isRead) {
+//     cardReadMessage.textContent = "Status: Read";
+//   } else {
+//     cardReadMessage.textContent = "Status: Not read";
+//   }
+
+//   newTitle.value = this.title;
+//   newAuthor.value = this.author;
+//   newPages.value = this.pages;
+//   if (this.isRead) {
+//     statusRead.checked = true;
+//   } else {
+//     statusNotRead.checked = true;
+//   }
+// };
+
+// Book.prototype.update = function () {
+//   this.title = newTitle.value;
+//   this.author = newAuthor.value;
+//   this.pages = Number(newPages.value);
+//   this.isRead = statusRead.checked ? true : false;
+// };
+
+// Book.prototype.remove = function () {
+//   const index = myLibrary.indexOf(this);
+//   if (index || index === 0) {
+//     myLibrary.splice(index, 1);
+//   }
+// };
+
+// Book.prototype.removeIfEmpty = function () {
+//   if (!this.title && !this.author && !this.pages) {
+//     removeButton.dispatchEvent(clickEvent);
+//   }
+// };
+
+// class syntax
+class Book {
+  id = crypto.randomUUID();
+
+  constructor(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
   }
 
-  this.id = crypto.randomUUID();
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
+  setCard() {
+    bookCard.dataset.id = this.id;
+
+    cardTitle.textContent = "Title: " + this.title;
+    cardAuthor.textContent = "Written by " + this.author;
+    cardPages.textContent = "Page(s): " + this.pages;
+    if (this.isRead) {
+      cardReadMessage.textContent = "Status: Read";
+    } else {
+      cardReadMessage.textContent = "Status: Not read";
+    }
+
+    newTitle.value = this.title;
+    newAuthor.value = this.author;
+    newPages.value = this.pages;
+    if (this.isRead) {
+      statusRead.checked = true;
+    } else {
+      statusNotRead.checked = true;
+    }
+  }
+
+  update() {
+    this.title = newTitle.value;
+    this.author = newAuthor.value;
+    this.pages = Number(newPages.value);
+    this.isRead = statusRead.checked ? true : false;
+  }
+
+  remove() {
+    const index = myLibrary.indexOf(this);
+    if (index || index === 0) {
+      myLibrary.splice(index, 1);
+    }
+  }
+
+  removeIfEmpty() {
+    if (!this.title && !this.author && !this.pages) {
+      removeButton.dispatchEvent(clickEvent);
+    }
+  }
 }
-
-Book.prototype.setCard = function () {
-  bookCard.dataset.id = this.id;
-
-  cardTitle.textContent = "Title: " + this.title;
-  cardAuthor.textContent = "Written by " + this.author;
-  cardPages.textContent = "Page(s): " + this.pages;
-  if (this.isRead) {
-    cardReadMessage.textContent = "Status: Read";
-  } else {
-    cardReadMessage.textContent = "Status: Not read";
-  }
-
-  newTitle.value = this.title;
-  newAuthor.value = this.author;
-  newPages.value = this.pages;
-  if (this.isRead) {
-    statusRead.checked = true;
-  } else {
-    statusNotRead.checked = true;
-  }
-};
-
-Book.prototype.update = function () {
-  this.title = newTitle.value;
-  this.author = newAuthor.value;
-  this.pages = Number(newPages.value);
-  this.isRead = statusRead.checked ? true : false;
-};
-
-Book.prototype.remove = function () {
-  const index = myLibrary.indexOf(this);
-  if (index || index === 0) {
-    myLibrary.splice(index, 1);
-  }
-};
-
-Book.prototype.removeIfEmpty = function () {
-  if (!this.title && !this.author && !this.pages) {
-    removeButton.dispatchEvent(clickEvent);
-  }
-};
 
 function addBookToLibrary(title, author, pages, isRead) {
   const book = new Book(title, author, pages, isRead);
